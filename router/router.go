@@ -1,6 +1,10 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+)
 
 type IFnRegistRoute = func(rgPublic *gin.RouterGroup, rgAuth *gin.RouterGroup)
 
@@ -28,4 +32,5 @@ func InitRouter() {
 	for _, fnRegistRoute := range gfnRoutes {
 		fnRegistRoute(rgPublic, rgAuth)
 	}
+	fmt.Printf("1 =====> 🚀🚀🚀 %v\n", 1)
 }
