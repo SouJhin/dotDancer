@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 type IFnRegistRoute = func(rgPublic *gin.RouterGroup, rgAuth *gin.RouterGroup)
@@ -32,5 +33,9 @@ func InitRouter() {
 	for _, fnRegistRoute := range gfnRoutes {
 		fnRegistRoute(rgPublic, rgAuth)
 	}
-	fmt.Printf("1 =====> 🚀🚀🚀 %v\n", 1)
+	if stPort := viper.GetString("server.port"); stPort == "" {
+		stPort = "8999"
+	} else {
+		r.Run(fmt.Sprintf(":%s", stPort))
+	}
 }
